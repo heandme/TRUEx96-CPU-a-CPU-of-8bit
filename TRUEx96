@@ -1,0 +1,98 @@
+Hello Scroll down for English
+TRUEx96架构CPU是我独自一个人设计的一块极简CPU
+(也可能不是CPU)
+我没有学过专业数字电路课程
+只是我个人上课无聊想出来的
+本作品开源禁止商用
+指令格式： 操作数[5 位] + 操作码[3 位] 
+​指令集如下
+xxxxx 000 立即数
+00xxx 001 alu运算
+xxxxx 010 xxxxx寄存器 传送(我叫它缓冲寄存器，不会算入总寄存器数，位数16)REG I
+xxxxx 011 REG I 传送 xxxxx寄存器
+0000x 100 je
+00000 101 jmp
+xxxxx 110 把地址xxxxx的in传送REG 4部分16bit in 均传送到了16bit此处是REG 5
+xxxxx 111 把REG 4的值传送地址xxxxx的OUT 与上面差不多 共有
+立即数 最大立即数32
+alu运算 运算REG 1 与 REG 2，结果传送REG 3支持add sub nand or and not 
+        add 00 000 001
+        sub 00 001 001
+        and 00 010 001
+        or   00 011 001
+        not 00 100 001
+je 进行REG2=0或>0操作，跳转时的地址在REG0中
+        =0 00 00 0 100
+        >0 00 00 1 100
+jmp 无条件跳转 跳转时的地址在REG0中
+什么？你说没有停机命令，哈哈哈怎么可能
+
+
+当程序出现立即数0时自动计数当第二次还是0(观察操作码与REG 0)出现5次，确定停机
+
+
+
+
+
+Hello Scroll down for English
+ 
+The TRUEx96 CPU architecture is an extremely simple CPU designed entirely by myself
+(It may not technically be a CPU)
+I have not taken any professional courses in digital circuits
+I just came up with it out of boredom during classes.
+This work is open-source, commercial use prohibited.
+ 
+Instruction format:
+Operand [5 bits] + Opcode [3 bits]
+ 
+Instruction set as follows:
+ 
+xxxxx 000  Immediate value
+00xxx 001  ALU operation
+xxxxx 010  Move xxxxx register to REG_I (buffer register, not counted in general registers, 16 bits)
+xxxxx 011  Move REG_I to xxxxx register
+0000x 100  JE (Jump if equal/condition)
+00000 101  JMP (Unconditional jump)
+xxxxx 110  Move IN from address xxxxx to REG_5 (16-bit; all IN data go to 16-bit REG_5)
+xxxxx 111  Move value from REG_4 to OUT at address xxxxx (similar to above)
+ 
+Immediate value:
+Max immediate value = 32
+ 
+ALU operations:
+Operate on REG_1 and REG_2, result to REG_3
+Supports: add, sub, nand, or, and, not
+ 
+add  00 000 001
+sub  00 001 001
+and  00 010 001
+or   00 011 001
+not  00 100 001
+ 
+JE:
+Check REG_2 for =0 or >0
+Jump address stored in REG_0
+ 
+=0   00 00 0 100
+>0   00 00 1 100
+ 
+JMP:
+Unconditional jump
+Jump address stored in REG_0
+ 
+What? You say there’s no HALT command? Hahaha, of course there is.
+ 
+When an immediate value of 0 appears, a counter increments automatically.
+If it is 0 again the second time (check opcode and REG_0),
+and this happens 5 times total, the CPU halts.
+Copyright (C) 2025 【TRUEx96】
+本项目使用 GPLv3 协议开源。
+你可以自由使用、修改、分发本项目，但必须遵循以下条款：
+1. 所有衍生作品必须同样以 GPLv3 协议开源。
+2. 必须保留原作者版权声明。
+3. 不得取消他人行使本协议的权利。
+   
+Copyright © 2026 TRUEx
+This project is licensed under the GNU General Public License v3.0.
+You may use, modify, and distribute this project freely, but all derivative works must be open-sourced under the same GPLv3 license and retain the original author attribution.
+
